@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Задание №1</title>
+  <link rel="stylesheet" href="./Задание №1_files/styles1.css">
+</head>
+<body>
+  <a href="task_main.html">Вернуться к списку заданий</a>
+  <h1>Это крупный заголовок</h1>
+  <h2>Это менее крупный заголовок</h2>
+  <h3>Это самый мелкий заголовок</h3>
+  <ol>
+    <li>Это первый пункт списка</li>
+    <li>Это второй пункт списка</li>
+    <li>Это третий пункт списка</li>
+    <li>Это четвёртый пункт списка</li>
+  </ol>
+  <p><b><i>Это полужирный курсивный текст</i></b></p>
+  <p>Это обычный текст</p>
+  <p><i>Этот текст записан курсивом</i></p>
+</body>
+</html>
+body {
+    font-size: 24px;
+}
+span.red {
+    color: red;
+}
+span.green {
+    color: green;
+}
