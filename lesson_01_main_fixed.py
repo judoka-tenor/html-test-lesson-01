@@ -1,4 +1,4 @@
-# Ветка lesson1: исправления flake8
+# PR-маркер: ветка lesson1
 
 
 def sub(a, b):

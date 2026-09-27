@@ -1,0 +1,315 @@
+{
+  "info": {
+    "name": "Яндекс.Расписания",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.rasp.yandex-net.ru/v3.0",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "ВАШ_API_КЛЮЧ",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Расписание между станциями",
+      "item": [
+        {
+          "name": "Позитивный: Москва - СПб (поезд)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/search/?apikey={{api_key}}&from=c146&to=c213&format=json&lang=ru_RU&date=2026-09-25&transport_types=train",
+              "host": ["{{base_url}}"],
+              "path": ["search"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "from", "value": "c146"},
+                {"key": "to", "value": "c213"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"},
+                {"key": "date", "value": "2026-09-25"},
+                {"key": "transport_types", "value": "train"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"В ответе есть pagination\", function () {",
+                  "    pm.expect(pm.response.json().pagination).to.exist;",
+                  "});",
+                  "pm.test(\"В ответе есть массив segments\", function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data.segments).to.be.an(\"array\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Негативный: без apikey",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/search/?from=c146&to=c213&format=json&lang=ru_RU",
+              "host": ["{{base_url}}"],
+              "path": ["search"],
+              "query": [
+                {"key": "from", "value": "c146"},
+                {"key": "to", "value": "c213"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код НЕ 200\", function () {",
+                  "    pm.response.to.not.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Расписание по станции",
+      "item": [
+        {
+          "name": "Позитивный: Шереметьево (электрички)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/schedule/?apikey={{api_key}}&station=s9600213&format=json&lang=ru_RU&date=2026-09-25&transport_types=suburban",
+              "host": ["{{base_url}}"],
+              "path": ["schedule"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "station", "value": "s9600213"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"},
+                {"key": "date", "value": "2026-09-25"},
+                {"key": "transport_types", "value": "suburban"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"В ответе есть массив schedule\", function () {",
+                  "    const j = pm.response.json();",
+                  "    pm.expect(j.schedule).to.be.an(\"array\");",
+                  "});",
+                  "pm.test(\"Название станции содержит Шереметьево\", function () {",
+                  "    const j = pm.response.json();",
+                  "    pm.expect(j.station.title).to.include(\"Шереметьево\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Негативный: несуществующая станция",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/schedule/?apikey={{api_key}}&station=s0000000&format=json&lang=ru_RU",
+              "host": ["{{base_url}}"],
+              "path": ["schedule"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "station", "value": "s0000000"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код НЕ 200\", function () {",
+                  "    pm.response.to.not.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Маршрут следования",
+      "item": [
+        {
+          "name": "Позитивный: маршрут нитки",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/thread/?apikey={{api_key}}&uid=038AA_h4t2&format=json&lang=ru_RU&show_systems=all",
+              "host": ["{{base_url}}"],
+              "path": ["thread"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "uid", "value": "038AA_h4t2"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"},
+                {"key": "show_systems", "value": "all"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"В ответе есть массив stops\", function () {",
+                  "    const j = pm.response.json();",
+                  "    pm.expect(j.stops).to.be.an(\"array\");",
+                  "});",
+                  "pm.test(\"UID в ответе совпадает с запросом\", function () {",
+                  "    const j = pm.response.json();",
+                  "    pm.expect(j.uid).to.eql(pm.request.url.query.get(\"uid\"));",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Негативный: несуществующий uid",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/thread/?apikey={{api_key}}&uid=INVALID-UID-12345&format=json&lang=ru_RU",
+              "host": ["{{base_url}}"],
+              "path": ["thread"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "uid", "value": "INVALID-UID-12345"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код НЕ 200\", function () {",
+                  "    pm.response.to.not.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Ближайшие станции",
+      "item": [
+        {
+          "name": "Позитивный: Курчатов (50 км)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/nearest_stations/?apikey={{api_key}}&lat=51.67&lng=35.65&distance=50&format=json&lang=ru_RU&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["nearest_stations"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "lat", "value": "51.67"},
+                {"key": "lng", "value": "35.65"},
+                {"key": "distance", "value": "50"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"},
+                {"key": "limit", "value": "10"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"В ответе есть массив stations\", function () {",
+                  "    const j = pm.response.json();",
+                  "    pm.expect(j.stations).to.be.an(\"array\");",
+                  "});",
+                  "pm.test(\"Каждая станция имеет distance и code\", function () {",
+                  "    const stations = pm.response.json().stations;",
+                  "    stations.forEach(function(s) {",
+                  "        pm.expect(s.distance).to.be.a(\"number\");",
+                  "        pm.expect(s.code).to.be.a(\"string\");",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Негативный: без координат",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/nearest_stations/?apikey={{api_key}}&distance=50&format=json&lang=ru_RU",
+              "host": ["{{base_url}}"],
+              "path": ["nearest_stations"],
+              "query": [
+                {"key": "apikey", "value": "{{api_key}}"},
+                {"key": "distance", "value": "50"},
+                {"key": "format", "value": "json"},
+                {"key": "lang", "value": "ru_RU"}
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Статус-код НЕ 200\", function () {",
+                  "    pm.response.to.not.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
