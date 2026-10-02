@@ -1,0 +1,135 @@
+{
+  "info": {
+    "_postman_id": "dcb89867-69f1-4cbb-97dd-2e8ef697524b",
+    "name": "YouGile_API_Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54254683",
+    "_collection_link": "https://go.postman.co/collection/54254683-dcb89867-69f1-4cbb-97dd-2e8ef697524b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Получить проект",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Создание запроса",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Список досок проекта",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Создание доски",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Создать колонку на доске",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Создаём задачу",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Запрос GET колонки",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "запрос в коллекции",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "project_id",
+      "value": ""
+    },
+    {
+      "key": "board_id",
+      "value": ""
+    },
+    {
+      "key": "column_id",
+      "value": ""
+    },
+    {
+      "key": "task_id",
+      "value": ""
+    },
+    {
+      "key": "Base_URL",
+      "value": "https://api.yougile.com"
+    },
+    {
+      "key": "API-key",
+      "value": "demo_key_123"
+    }
+  ]
+}

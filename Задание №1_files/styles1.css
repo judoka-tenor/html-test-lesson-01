@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    color: #333;
+}
+
+/* Стили заголовков */
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #34495e;
+    margin-bottom: 8px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    margin-bottom: 6px;
+}
+
+/* Стили списков */
+ul, ol {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+li {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+/* Стили текста */
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+/* Комбинированный стиль: полужирный курсив */
+em strong {
+    font-weight: bold;
+    font-style: italic;
+}
