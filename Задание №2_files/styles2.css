@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    color: #333;
+}
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
+.blue {
+    color: blue;
+}
+.yellow {
+    color: yellow;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.xxsmall  { font-size: x-small; }
+.xsmall   { font-size: small; }
+.small    { font-size: small; }
+.medium   { font-size: medium; }
+.large    { font-size: large; }
+.xlarge   { font-size: x-large; }
+.xxlarge  { font-size: xx-large; }
