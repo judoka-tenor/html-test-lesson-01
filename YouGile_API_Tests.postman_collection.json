@@ -122,6 +122,14 @@
     {
       "key": "task_id",
       "value": ""
+    },
+    {
+      "key": "Base_URL",
+      "value": "https://api.yougile.com"
+    },
+    {
+      "key": "API-key",
+      "value": "demo_key_123"
     }
   ]
 }
